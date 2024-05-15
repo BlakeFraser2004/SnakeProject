@@ -1,20 +1,20 @@
 #include "GameBoard.h"
-#include <iostream>
 
-GameBoard::GameBoard(int boardSize) : boardSize(boardSize) {
+GameBoard::GameBoard(int gridSize) : boardSize(gridSize) {
     // Initialize the grid with zeros
-    grid.resize(boardSize);
-    for (int i = 0; i < boardSize; ++i) {
-        grid[i].resize(boardSize, 0);
+    grid.resize(gridSize);
+    for (int i = 0; i < gridSize; ++i) {
+        grid[i].resize(gridSize, 0);
     }
 
     // Initialize the snake and other necessary components here
 }
 
 void GameBoard::initializeBoard() {
+    // Implement initialization if needed
 }
 
-void GameBoard::drawBoard(sf::RenderWindow &window) {
+void GameBoard::drawBoard(sf::RenderWindow& window) {
     // Calculate the size of each square based on the size of the window
     float squareSize = static_cast<float>(window.getSize().x) / boardSize;
 
@@ -36,4 +36,12 @@ void GameBoard::drawBoard(sf::RenderWindow &window) {
             window.draw(square);
         }
     }
+}
+
+void GameBoard::updateBoard() {
+    // Implement board update if needed
+}
+
+int GameBoard::getBoardSize() const { // Added function definition
+    return boardSize;
 }
