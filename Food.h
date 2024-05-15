@@ -1,4 +1,3 @@
-// Food.h
 #ifndef FOOD_H
 #define FOOD_H
 
@@ -10,7 +9,7 @@ private:
 
 public:
     Food(int gridSize);
-    void respawn(int maxWidth, int maxHeight);
+    void respawn(int gridSize);
     void draw(sf::RenderWindow& window) const;
     sf::Vector2f getPosition() const;
 };
