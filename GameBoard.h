@@ -10,10 +10,11 @@ private:
     std::vector<std::vector<int> > grid;
 
 public:
-    GameBoard(int boardSize);
+    GameBoard(int gridSize);
     void initializeBoard();
-    void drawBoard(sf::RenderWindow &window);
+    void drawBoard(sf::RenderWindow& window);
     void updateBoard();
+    int getBoardSize() const;
 };
 
 #endif // GAMEBOARD_H
