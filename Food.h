@@ -6,6 +6,8 @@
 class Food {
 private:
     sf::RectangleShape shape;
+    sf::Vector2i gridPosition; // Grid position of the food
+    int gridSize; // Size of each grid cell in pixels
 
 public:
     Food(int gridSize);

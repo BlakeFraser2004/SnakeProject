@@ -1,0 +1,9 @@
+/opt/homebrew/Cellar/sfml/2.6.1
+
+g++ Snake.o SnakeTest.o -o sfml-app -L/opt/homebrew/Cellar/sfml/2.6.1/lib -lsfml-graphics -lsfml-window -lsfml-system
+
+g++ -c main.cpp GameBoard.cpp Snake.cpp Food.cpp  -I/opt/homebrew/Cellar/sfml/2.6.1/include 
+
+g++ main.o GameBoard.o Snake.o Food.o -o sfml-app -L/opt/homebrew/Cellar/sfml/2.6.1/lib -lsfml-graphics -lsfml-window -lsfml-system
+
+g++ -c gameSnake.cpp  -I/opt/homebrew/Cellar/sfml/2.6.1/include
