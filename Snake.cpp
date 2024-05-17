@@ -1,6 +1,6 @@
 #include "Snake.h"
 
-Snake::Snake(int gridSize) : gridSize(gridSize), speed(15.00f) {
+Snake::Snake(int gridSize) : gridSize(gridSize), speed(10.00f) {
     segments.push_back(sf::Vector2i(gridSize / 2, gridSize / 2)); // Initial position of the snake
     direction = sf::Vector2i(1, 0); // Initial direction (right)
     color = sf::Color::Green; // Snake color
@@ -31,13 +31,13 @@ void Snake::render(sf::RenderWindow& window) {
 }
 
 void Snake::handleInput(sf::RenderWindow& window) {
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && direction != sf::Vector2i(0, 1)) {
         direction = sf::Vector2i(0, -1);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && direction != sf::Vector2i(0, -1)) {
         direction = sf::Vector2i(0, 1);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && direction != sf::Vector2i(1, 0)) {
         direction = sf::Vector2i(-1, 0);
-    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+    } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) && direction != sf::Vector2i(-1, 0)) {
         direction = sf::Vector2i(1, 0);
     }
 }
@@ -73,19 +73,16 @@ bool Snake::checkCollisionWithBorder(const GameBoard& gameBoard) {
     return false; // No collision
 }
 
-bool Snake::checkSelfCollision(const sf::Vector2i& foodPosition) {
-    sf::Vector2i headPosition = segments.front();
-    // Check if the head of the snake collides with any other segment
+bool Snake::checkSelfCollision(const sf::Vector2i& headPosition, const sf::Vector2i& foodPosition) {
+    // Iterate through the segments of the snake's body, excluding the head
     for (size_t i = 1; i < segments.size(); ++i) {
-        // Skip checking collision with the food position
+        // Check if the head of the snake collides with any other segment, except the food position
         if (headPosition == segments[i] && headPosition != foodPosition) {
             return true; // Collision detected
         }
     }
     return false; // No collision
 }
-
-
 
 
 void Snake::reset() {

@@ -44,8 +44,11 @@ if (snake.checkCollisionWithBorder(gameBoard)) {
         break; // Exit the game loop
     }
 
-
-
+// if (snake.checkSelfCollision(sf::Vector2i(snake.getHeadPosition()), sf::Vector2i(food.getPosition()))) {
+//     std::cout << "Snake collided with itself. Game Over!" << std::endl;
+//     window.close();
+//     break;
+// }
         // Check for collision with food
         sf::Vector2i snakeHeadPositionInt = snake.getHeadPosition();
         sf::Vector2f snakeHeadPosition(static_cast<float>(snakeHeadPositionInt.x), static_cast<float>(snakeHeadPositionInt.y));
@@ -76,14 +79,8 @@ if (snake.checkCollisionWithBorder(gameBoard)) {
         food.respawn(50); // Pass the grid size
     }
 }
-
-
-
-
-
         std::cout << "Snake's Head Position: (" << snakeHeadPosition.x << ", " << snakeHeadPosition.y << ")" << std::endl;
         std::cout << "Food's Position: (" << foodPosition.x << ", " << foodPosition.y << ")" << std::endl;
-
 
         // Clear the window
         window.clear(sf::Color::White);

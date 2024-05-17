@@ -1,14 +1,17 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
+#include <SFML/Graphics.hpp>
 
 class GameObject {
-protected:
-    int gridSize;
+    private:
+    sf::Vector2f positionOfObject;
 
-public:
-    GameObject(int gridSize);
-    virtual ~GameObject();
-    virtual void respawn(int gridSize) = 0; // Pure virtual function to respawn the object
+    public:
+    GameObject();
+    GameObject(sf::Vector2f position);
+    sf::Vector2f getPosition() const;
+    void setPosition(sf::Vector2f position);
 };
 
-#endif // GAMEOBJECT_H
+
+#endif

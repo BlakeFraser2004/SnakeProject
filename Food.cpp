@@ -5,26 +5,27 @@
 
 Food::Food(int gridSize) {
     shape.setSize(sf::Vector2f(static_cast<float>(gridSize), static_cast<float>(gridSize)));
-    shape.setFillColor(sf::Color::Red);
-    shape.setPosition(15, 15);
+    shape.setPosition(25, 25);
+    shapeShadow.setFillColor(sf::Color::Red);
+    shapeShadow.setPosition(250,250);
+    shapeShadow.setSize(sf::Vector2f(static_cast<float>(gridSize), static_cast<float>(gridSize)));
 }
 
 void Food::respawn(int gridSize) {
-    
+    // Generate random coordinates within the grid
     int x = rand() % gridSize;
     int y = rand() % gridSize;
+    std::cout << x << "  " << y << std::endl;
 
-    // Ensure x and y are within the range (0, gridSize - 1)
-    x = std::min(std::max(x, 0), gridSize - 1);
-    y = std::min(std::max(y, 0), gridSize - 1);
-
-    shape.setPosition(sf::Vector2f(x,y));
+    // Set the position of the shape
+    shapeShadow.setPosition(sf::Vector2f(10*x,10*y));
+    shape.setPosition(sf::Vector2f(x, y));
 }
+
 void Food::draw(sf::RenderWindow& window) const {
     //std::cout << "Drawing food at position: (" << shape.getPosition().x << ", " << shape.getPosition().y << ")" << std::endl;
-    window.draw(shape);
+    window.draw(shapeShadow);
 }
-
 
 sf::Vector2f Food::getPosition() const {
     return shape.getPosition();

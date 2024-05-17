@@ -1,12 +1,18 @@
 #include "GameObject.h"
-#include <cstdlib> // For rand()
+#include <iostream>
 
-GameObject::GameObject(int gridSize) : gridSize(gridSize) {}
+GameObject::GameObject() {
+    // Default constructor
+}
 
-void GameObject::draw(sf::RenderWindow& window) const {
-    window.draw(shape);
+GameObject::GameObject(sf::Vector2f position) : positionOfObject(position) {
+    // Constructor with position parameter
 }
 
 sf::Vector2f GameObject::getPosition() const {
-    return position;
+    return positionOfObject;
+}
+
+void GameObject::setPosition(sf::Vector2f position) {
+    positionOfObject = position;
 }
