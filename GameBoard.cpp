@@ -1,4 +1,4 @@
-#include "GameBoard.h"
+#include "gameBoard.h"
 
 GameBoard::GameBoard(int gridSize) : boardSize(gridSize) {
     // Initialize the grid with zeros

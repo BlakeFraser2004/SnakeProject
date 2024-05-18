@@ -1,4 +1,4 @@
-#include "GameObject.h"
+#include "gameObject.h"
 
 GameObject::GameObject(int gridSize) {
     shape.setSize(sf::Vector2f(static_cast<float>(gridSize), static_cast<float>(gridSize)));
