@@ -45,32 +45,26 @@ int main() {
             while (window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed) {
                     window.close();
-                }
-                else if (event.type == sf::Event::KeyPressed) {
-                    if (event.key.code == sf::Keyboard::Up) {
-                        mainMenu.MoveUp();
-                    }
-                    else if (event.key.code == sf::Keyboard::Down) {
-                        mainMenu.MoveDown();
-                    }
-                    else if (event.key.code == sf::Keyboard::E) {
+                } else if (event.type == sf::Event::KeyPressed) {
+                    if (event.key.code == sf::Keyboard::R) {
                         int selection = mainMenu.MainMenuPressed();
                         if (selection == 0) {
                             inMainMenu = false;
                             clock.restart();
-                        }
-                        else if (selection == 1) {
+                        } else if (selection == 1) {
                             window.close();
                             return 0;
                         }
+                    } else if (event.key.code == sf::Keyboard::E) {
+                        window.close();
+                        return 0;
                     }
                 }
             }
             window.clear(sf::Color::Black);
             mainMenu.draw(window);
             window.display();
-        }
-        else {
+        } else {
             sf::Time elapsedTime = clock.restart();
             timeSinceLastUpdate += elapsedTime;
 
@@ -96,8 +90,8 @@ int main() {
             float distanceX = std::abs(snakeHeadPosition.x - foodPosition.x);
             float distanceY = std::abs(snakeHeadPosition.y - foodPosition.y);
 
-            int cellSize = 0;
-            float tolerance = cellSize;
+            int cellSize = 0;  // Assuming cell size is 10, adjust accordingly
+            float tolerance = static_cast<float>(cellSize);
 
             if (distanceX <= tolerance && distanceY <= tolerance) {
                 snake.grow();

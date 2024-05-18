@@ -10,3 +10,5 @@ g++ -c gameSnake.cpp  -I/opt/homebrew/Cellar/sfml/2.6.1/include
 
 
 g++ -c Snakegame.cpp -I/opt/homebrew/Cellar/sfml/2.6.1/include
+
+g++ -c GameBoard.cpp -I/opt/homebrew/Cellar/sfml/2.6.1/include 

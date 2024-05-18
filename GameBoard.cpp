@@ -10,10 +10,6 @@ GameBoard::GameBoard(int gridSize) : boardSize(gridSize) {
     // Initialize the snake and other necessary components here
 }
 
-void GameBoard::initializeBoard() {
-    // Implement initialization if needed
-}
-
 void GameBoard::drawBoard(sf::RenderWindow& window) {
     // Calculate the size of each square based on the size of the window
     float squareSize = static_cast<float>(window.getSize().x) / boardSize;
@@ -37,11 +33,6 @@ void GameBoard::drawBoard(sf::RenderWindow& window) {
         }
     }
 }
-
-void GameBoard::updateBoard() {
-    // Implement board update if needed
-}
-
 int GameBoard::getBoardSize() const { // Added function definition
     return boardSize;
 }

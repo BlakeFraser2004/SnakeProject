@@ -13,8 +13,7 @@ public:
     ~MainMenu();
 
     void draw(RenderWindow& window);
-    void MoveUp();
-    void MoveDown();
+    
 
     int MainMenuPressed() const {
         return MainMenuSelected;
@@ -24,4 +23,6 @@ private:
     int MainMenuSelected;
     Font font;
     Text mainMenu[Max_main_menu];
+    Texture backgroundTexture;
+    Sprite backgroundSprite;
 };
