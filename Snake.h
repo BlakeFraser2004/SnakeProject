@@ -21,7 +21,7 @@ public:
     void grow();
     sf::Vector2i getHeadPosition();
     bool checkCollisionWithBorder(const GameBoard& gameBoard);
-    bool checkSelfCollision(const sf::Vector2i& headPosition, const sf::Vector2i& foodPosition);
+    bool checkSelfCollision(const sf::Vector2i& headPosition);
     void reset();   
     int getSize() const;
 };

@@ -8,7 +8,7 @@ CXXFLAGS := -std=c++11 -Wall
 SFML_LIBS := -lsfml-graphics -lsfml-window -lsfml-system
 
 # Source files
-SRCS := main.cpp Snake.cpp Food.cpp GameBoard.cpp
+SRCS := main.cpp Snake.cpp Food.cpp GameBoard.cpp Score.cpp MainMenu.cpp HighScore.cpp GameOver.cpp GameObject.cpp
 
 # Object files
 OBJS := $(SRCS:.cpp=.o)
@@ -21,10 +21,10 @@ EXEC := sfml-app
 all: $(EXEC)
 
 $(EXEC): $(OBJS)
-    $(CXX) $(CXXFLAGS) -o $@ $^ $(SFML_LIBS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(SFML_LIBS)
 
 %.o: %.cpp
-    $(CXX) $(CXXFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 clean:
-    $(RM) $(OBJS) $(EXEC)
+	$(RM) $(OBJS) $(EXEC)

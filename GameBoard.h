@@ -6,15 +6,15 @@
 
 class GameBoard {
 private:
-    int boardSize;
-    std::vector<std::vector<int> > grid;
+    int boardSize; //Size of the game board grid
+    std::vector<std::vector<int> > grid; //2D vector representation of the game board grid
 
 public:
+    //Constructor to intialise the gameboard with a specified grid size.
     GameBoard(int gridSize);
-    void initializeBoard();
+    //Draw the gameboard on the provided window.
     void drawBoard(sf::RenderWindow& window);
-    void updateBoard();
     int getBoardSize() const;
 };
 
-#endif // GAMEBOARD_H
+#endif // GAMEBOARD_H 
