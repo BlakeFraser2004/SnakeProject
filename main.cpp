@@ -1,3 +1,4 @@
+
 #include <SFML/Graphics.hpp>
 #include "GameBoard.h"
 #include "Snake.h"
@@ -35,7 +36,7 @@ int main() {
     sf::Text scoreText;
     scoreText.setFont(font);
     scoreText.setCharacterSize(24);
-    scoreText.setFillColor(sf::Color::Black);
+    scoreText.setFillColor(sf::Color::White);
     scoreText.setPosition(10, 10);
 
     sf::Clock clock; // Clock to measure the elapsed time
@@ -105,7 +106,7 @@ int main() {
             float distanceY = std::abs(snakeHeadPosition.y - foodPosition.y);
 
             // Determine the tolerance distance based on the size of the grid cell
-            int cellSize = 10; // Assuming each grid cell is 10x10 pixels
+            int cellSize = 0; // Assuming each grid cell is 10x10 pixels
             float tolerance = cellSize;
 
             if (distanceX <= tolerance && distanceY <= tolerance) {
