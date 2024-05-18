@@ -22,6 +22,9 @@ public:
 
     // Get the time played
     float getTimePlayed() const;
+
+    virtual int getHighScore(){return calculateScore();}; // virtual function to return high score.
+    
 private:
     int foodEaten;
     float timePlayed;
