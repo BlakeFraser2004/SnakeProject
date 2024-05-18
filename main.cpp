@@ -5,6 +5,7 @@
 #include "Score.h"
 #include "MainMenu.h"
 #include "HighScore.h"
+#include "GameOver.h" // Include the GameOver class
 #include <iostream>
 
 int main() {
@@ -17,6 +18,7 @@ int main() {
     Food food(9);
     Score score;
     HighScore highscore;
+    GameOver gameOver(window.getSize().x, window.getSize().y); // Instantiate GameOver
 
     sf::Font font;
     if (!font.loadFromFile("arial.ttf")) {
@@ -39,6 +41,8 @@ int main() {
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
     bool inMainMenu = true;
+    bool isGameOver = false; // Track game over state
+
     while (window.isOpen()) {
         if (inMainMenu) {
             sf::Event event;
@@ -51,6 +55,11 @@ int main() {
                         if (selection == 0) {
                             inMainMenu = false;
                             clock.restart();
+                            isGameOver = false; // Reset game over state
+                            // Reset game state
+                            snake = Snake(10);
+                            food = Food(9);
+                            score.reset(); // Reset the score
                         } else if (selection == 1) {
                             window.close();
                             return 0;
@@ -63,6 +72,13 @@ int main() {
             }
             window.clear(sf::Color::Black);
             mainMenu.draw(window);
+            window.display();
+        } else if (isGameOver) { // Handle game over screen
+            if (gameOver.handleInput(window)) {
+                inMainMenu = true; // Return to main menu
+            }
+            window.clear(sf::Color::Black);
+            gameOver.draw(window);
             window.display();
         } else {
             sf::Time elapsedTime = clock.restart();
@@ -78,10 +94,10 @@ int main() {
             snake.handleInput(window);
             snake.update();
 
-            if (snake.checkCollisionWithBorder(gameBoard)) {
-                std::cout << "Snake collided with the border. Game Over!" << std::endl;
-                window.close();
-                break;
+            if (snake.checkCollisionWithBorder(gameBoard)) { // Check for self-collision too
+                std::cout << "Snake collided with the border or itself. Game Over!" << std::endl;
+                isGameOver = true; // Set game over state
+                continue; // Skip remaining game loop logic
             }
 
             sf::Vector2i snakeHeadPositionInt = snake.getHeadPosition();

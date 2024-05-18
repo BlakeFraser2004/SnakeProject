@@ -22,3 +22,8 @@ int Score::getFoodEaten() const {
 float Score::getTimePlayed() const {
     return timePlayed;
 }
+
+void Score::reset() {
+    foodEaten = 0;
+    timePlayed = 0.0f;
+}

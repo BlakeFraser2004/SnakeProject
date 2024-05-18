@@ -2,10 +2,10 @@
 CC = g++
 
 # Compiler flags
-CFLAGS = -Wall -Wextra -std=c++11
+CFLAGS = -Wall -Wextra -std=c++11 -I/opt/homebrew/Cellar/sfml/2.6.1/include
 
 # Source files
-SRCS = main.cpp GameBoard.cpp Snake.cpp Food.cpp Score.cpp MainMenu.cpp HighScore.cpp
+SRCS = main.cpp GameBoard.cpp Snake.cpp Food.cpp Score.cpp MainMenu.cpp HighScore.cpp GameOver.cpp
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
@@ -23,7 +23,6 @@ all: $(EXEC)
 # Rule to link object files into executable
 $(EXEC): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(EXEC) -L/opt/homebrew/Cellar/sfml/2.6.1/lib -lsfml-graphics -lsfml-window -lsfml-system
-
 
 # Clean rule
 clean:

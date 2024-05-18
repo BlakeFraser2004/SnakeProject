@@ -33,6 +33,8 @@ void GameBoard::drawBoard(sf::RenderWindow& window) {
         }
     }
 }
+
+
 int GameBoard::getBoardSize() const { // Added function definition
     return boardSize;
 }
