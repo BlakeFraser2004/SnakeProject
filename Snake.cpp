@@ -90,3 +90,36 @@ void Snake::reset() {
     segments.push_back(sf::Vector2i(gridSize / 2, gridSize / 2)); // Initial position of the snake
     direction = sf::Vector2i(1, 0); // Initial direction (right)
 }
+
+Snake::Snake(int gridSize) : GameObject(gridSize), gridSize(gridSize), direction(gridSize, 0) {
+    shape.setFillColor(sf::Color::Green);
+    body.push_back(shape);
+}
+
+void Snake::move() {
+    for (std::size_t i = body.size() - 1; i > 0; --i) {
+        body[i].setPosition(body[i - 1].getPosition());
+    }
+    body[0].move(direction);
+}
+
+void Snake::grow() {
+    sf::RectangleShape newSegment(shape);
+    newSegment.setPosition(body.back().getPosition());
+    body.push_back(newSegment);
+}
+
+bool Snake::checkCollision() const {
+    for (std::size_t i = 1; i < body.size(); ++i) {
+        if (body[0].getGlobalBounds().intersects(body[i].getGlobalBounds())) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Snake::draw(sf::RenderWindow& window) const {
+    for (const auto& segment : body) {
+        window.draw(segment);
+    }
+}

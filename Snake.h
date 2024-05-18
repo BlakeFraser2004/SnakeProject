@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "gameObject.h"
 #include "GameBoard.h"
 
 class Snake {
@@ -24,6 +25,21 @@ public:
     bool checkSelfCollision(const sf::Vector2i& headPosition, const sf::Vector2i& foodPosition);
     void reset();   
     int getSize() const;
+};
+
+
+class Snake : public GameObject {
+private:
+    std::vector<sf::RectangleShape> body;
+    sf::Vector2f direction;
+    int gridSize;
+
+public:
+    Snake(int gridSize);
+    void move();
+    void grow();
+    bool checkCollision() const;
+    void draw(sf::RenderWindow& window) const override;
 };
 
 #endif // SNAKE_H
