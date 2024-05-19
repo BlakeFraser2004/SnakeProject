@@ -73,11 +73,11 @@ bool Snake::checkCollisionWithBorder(const GameBoard& gameBoard) {
     return false; // No collision
 }
 
-bool Snake::checkSelfCollision(const sf::Vector2i& headPosition, const sf::Vector2i& foodPosition) {
+bool Snake::checkSelfCollision(const sf::Vector2i& headPosition) {
     // Iterate through the segments of the snake's body, excluding the head
     for (size_t i = 1; i < segments.size(); ++i) {
         // Check if the head of the snake collides with any other segment, except the food position
-        if (headPosition == segments[i] && headPosition != foodPosition) {
+        if (headPosition == segments[i]) {
             return true; // Collision detected
         }
     }

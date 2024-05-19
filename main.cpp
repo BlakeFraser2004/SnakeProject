@@ -5,7 +5,7 @@
 #include "Score.h"
 #include "MainMenu.h"
 #include "HighScore.h"
-#include "GameOver.h" // Include the GameOver class
+#include "GameOver.h"
 #include <iostream>
 
 int main() {
@@ -17,8 +17,8 @@ int main() {
     Snake snake(10);
     Food food(9);
     Score score;
-    HighScore highscore;
-    GameOver gameOver(window.getSize().x, window.getSize().y); // Instantiate GameOver
+    HighScore highscore("highscores.txt");
+    GameOver gameOver(window.getSize().x, window.getSize().y);
 
     sf::Font font;
     if (!font.loadFromFile("arial.ttf")) {
@@ -41,7 +41,7 @@ int main() {
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
     bool inMainMenu = true;
-    bool isGameOver = false; // Track game over state
+    bool isGameOver = false;
 
     while (window.isOpen()) {
         if (inMainMenu) {
@@ -51,19 +51,15 @@ int main() {
                     window.close();
                 } else if (event.type == sf::Event::KeyPressed) {
                     if (event.key.code == sf::Keyboard::R) {
-                        int selection = mainMenu.MainMenuPressed();
-                        if (selection == 0) {
-                            inMainMenu = false;
-                            clock.restart();
-                            isGameOver = false; // Reset game over state
-                            // Reset game state
-                            snake = Snake(10);
-                            food = Food(9);
-                            score.reset(); // Reset the score
-                        } else if (selection == 1) {
-                            window.close();
-                            return 0;
-                        }
+                        inMainMenu = false;
+                        clock.restart();
+                        isGameOver = false;
+                        snake = Snake(10);
+                        food = Food(9);
+                        score.reset();
+                    } else if (event.key.code == sf::Keyboard::W) {
+                        highscore.wipeHighScore();
+                        highScoreText.setString("High Score: " + std::to_string(highscore.getHighScore()));
                     } else if (event.key.code == sf::Keyboard::E) {
                         window.close();
                         return 0;
@@ -73,9 +69,9 @@ int main() {
             window.clear(sf::Color::Black);
             mainMenu.draw(window);
             window.display();
-        } else if (isGameOver) { // Handle game over screen
+        } else if (isGameOver) {
             if (gameOver.handleInput(window)) {
-                inMainMenu = true; // Return to main menu
+                inMainMenu = true;
             }
             window.clear(sf::Color::Black);
             gameOver.draw(window);
@@ -94,10 +90,10 @@ int main() {
             snake.handleInput(window);
             snake.update();
 
-            if (snake.checkCollisionWithBorder(gameBoard)) { // Check for self-collision too
+            if (snake.checkCollisionWithBorder(gameBoard)) {
                 std::cout << "Snake collided with the border or itself. Game Over!" << std::endl;
-                isGameOver = true; // Set game over state
-                continue; // Skip remaining game loop logic
+                isGameOver = true;
+                continue;
             }
 
             sf::Vector2i snakeHeadPositionInt = snake.getHeadPosition();
@@ -112,20 +108,14 @@ int main() {
             if (distanceX <= tolerance && distanceY <= tolerance) {
                 snake.grow();
                 score.increaseFoodEaten();
+                highScoreText.setString("High Score: " + std::to_string(highscore.getHighScore()));
+                highScoreText.setFillColor(sf::Color::Yellow);
 
                 if (score.calculateScore() > highscore.getHighScore()) {
                     highscore.setHighScore(score.calculateScore());
-                    highScoreText.setString("High Score: " + std::to_string(highscore.getHighScore()));
-                    highScoreText.setFillColor(sf::Color::Yellow);
                 }
 
                 food.respawn(50);
-            }
-
-            // Update score based on time elapsed since last update
-            while (timeSinceLastUpdate > sf::seconds(1.0f)) {
-                score.updateTimePlayed(1.0f);
-                timeSinceLastUpdate -= sf::seconds(1.0f);
             }
 
             scoreText.setString("Score: " + std::to_string(score.calculateScore()));

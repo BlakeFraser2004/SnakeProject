@@ -1,29 +1,20 @@
 #include "Score.h"
 
-Score::Score() : foodEaten(1), timePlayed(0.0f) {}
+Score::Score() : foodEaten(1) {} // Initalise foodEaten to 1
 
 void Score::increaseFoodEaten() {
     foodEaten++;
 }
 
-void Score::updateTimePlayed(float deltaTime) {
-    timePlayed += deltaTime;
-}
-
 int Score::calculateScore() const {
     // Adjust the calculation to provide a non-zero score early on
-    return static_cast<int>((foodEaten + timePlayed));
+    return static_cast<int>((foodEaten));
 }
 
 int Score::getFoodEaten() const {
     return foodEaten;
 }
 
-float Score::getTimePlayed() const {
-    return timePlayed;
-}
-
 void Score::reset() {
     foodEaten = 0;
-    timePlayed = 0.0f;
 }

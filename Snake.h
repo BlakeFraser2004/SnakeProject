@@ -10,8 +10,8 @@ private:
     std::vector<sf::Vector2i> segments;
     sf::Vector2i direction;
     sf::Color color;
+    int gridSize; // Move this before speed
     float speed;
-    int gridSize;
 
 public:
     Snake(int gridSize);
@@ -21,8 +21,8 @@ public:
     void grow();
     sf::Vector2i getHeadPosition();
     bool checkCollisionWithBorder(const GameBoard& gameBoard);
-    bool checkSelfCollision(const sf::Vector2i& headPosition, const sf::Vector2i& foodPosition);
-    void reset();   
+    bool checkSelfCollision(const sf::Vector2i& headPosition);
+    void reset();
     int getSize() const;
 };
 
