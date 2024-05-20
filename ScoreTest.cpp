@@ -1,23 +1,25 @@
 #include <iostream>
-#include "Score.h" // Include your Score class header
+#include "Score.h"
 
 int main() {
-    // Create Score instance
+    // Create Score instance.
     Score score;
 
     // Simulate some gameplay
-    score.increaseFoodEaten(); // Increase food eaten count
-    score.increaseFoodEaten(); // Increase food eaten count again
+    // Increase food eaten count
+    score.increaseFoodEaten();
+    // Increase food eaten count again
+    score.increaseFoodEaten();
 
-    // Get and display score
+    // Get and display score.
     int finalScore = score.calculateScore();
     std::cout << "Final Score: " << finalScore << std::endl;
 
-    // Get and display food eaten
+    // Get and display food eaten.
     int foodsEaten = score.getFoodEaten();
     std::cout << "Foods Eaten: " << foodsEaten << std::endl;
 
-    // Reset score and display values again
+    // Reset score and display values again.
     score.reset();
     finalScore = score.calculateScore();
     foodsEaten = score.getFoodEaten();

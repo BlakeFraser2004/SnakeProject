@@ -3,11 +3,13 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
-
+//The GameBoard class initialises the grid and draws the game board.
 class GameBoard {
 private:
-    int boardSize; //Size of the game board grid
-    std::vector<std::vector<int> > grid; //2D vector representation of the game board grid
+    //Size of the game board grid.
+    int boardSize; 
+    //2D vector representation of the game board grid
+    std::vector<std::vector<int> > grid;
 
 public:
     //Constructor to intialise the gameboard with a specified grid size.

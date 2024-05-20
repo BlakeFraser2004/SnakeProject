@@ -1,13 +1,14 @@
+//Implementation of the GameBoard class methods
+//This class manages the game baord, which includes initialising the grid and drawing the board.
 #include "GameBoard.h"
 
+//Initialises the gameboard with the given grid size
 GameBoard::GameBoard(int gridSize) : boardSize(gridSize) {
     // Initialize the grid with zeros
     grid.resize(gridSize);
     for (int i = 0; i < gridSize; ++i) {
         grid[i].resize(gridSize, 0);
     }
-
-    // Initialize the snake and other necessary components here
 }
 
 void GameBoard::drawBoard(sf::RenderWindow& window) {
@@ -18,22 +19,21 @@ void GameBoard::drawBoard(sf::RenderWindow& window) {
     sf::RectangleShape square(sf::Vector2f(squareSize, squareSize));
     for (int i = 0; i < boardSize; ++i) {
         for (int j = 0; j < boardSize; ++j) {
-            // Calculate position for each square
+            // Calculates the position for each square.
             float posX = i * squareSize;
             float posY = j * squareSize;
 
-            // Set position for the square
+            // Sets the position for the square shape on the gameboard.
             square.setPosition(posX, posY);
 
-            // Set fill color for the square
-            square.setFillColor(sf::Color::Black); // Inside color
+            // Sets the colour of the gameboard
+            square.setFillColor(sf::Color::Black);
 
-            // Draw the square
+            // Draws the square (gameboard)
             window.draw(square);
         }
     }
 }
-
 
 int GameBoard::getBoardSize() const { // Added function definition
     return boardSize;

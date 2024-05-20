@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "MainMenu.h" // Include your MainMenu class header
+#include "MainMenu.h"
 
 int main() {
     // Define window dimensions
@@ -17,14 +17,18 @@ int main() {
         // Handle events
         sf::Event event;
         while (window.pollEvent(event)) {
+            // Close window if the close button is clicked
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            // Handle key presses
             else if (event.type == sf::Event::KeyPressed) {
+                // Check if the 'R' key is pressed
                 if (event.key.code == sf::Keyboard::R) {
                     // Handle Play option selected
                     std::cout << "Play option selected!" << std::endl;
                 }
+                // Check if the 'E' key is pressed
                 else if (event.key.code == sf::Keyboard::E) {
                     // Handle Exit option selected
                     std::cout << "Exit option selected!" << std::endl;

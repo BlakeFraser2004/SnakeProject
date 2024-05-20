@@ -6,7 +6,6 @@ CFLAGS = -Wall -Wextra -std=c++11 -I/opt/homebrew/Cellar/sfml/2.6.1/include
 
 # Source files
 SRCS = main.cpp GameBoard.cpp Snake.cpp Food.cpp Score.cpp MainMenu.cpp HighScore.cpp GameOver.cpp
-#SRCS =Score.cpp ScoreTest.cpp
 # Object files
 OBJS = $(SRCS:.cpp=.o)
 
