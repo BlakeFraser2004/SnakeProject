@@ -7,6 +7,7 @@
 #include "HighScore.h"
 #include "GameOver.h"
 #include <iostream>
+#include <ctime>
 
 int main() {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -25,6 +26,7 @@ int main() {
         std::cerr << "Error loading font\n";
         return -1;
     }
+
     sf::Text scoreText;
     scoreText.setFont(font);
     scoreText.setCharacterSize(24);
@@ -123,7 +125,7 @@ int main() {
             window.clear(sf::Color::White);
             gameBoard.drawBoard(window);
             food.draw(window);
-            snake.render(window);
+            snake.draw(window); // Changed to draw instead of render
             window.draw(scoreText);
             window.draw(highScoreText);
             window.display();

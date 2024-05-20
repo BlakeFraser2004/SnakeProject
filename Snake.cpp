@@ -19,7 +19,7 @@ void Snake::update() {
     }
 }
 
-void Snake::render(sf::RenderWindow& window) {
+void Snake::draw(sf::RenderWindow& window) {
     sf::RectangleShape segment(sf::Vector2f(gridSize - 1, gridSize - 1));
     segment.setFillColor(color);
 

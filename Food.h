@@ -2,8 +2,9 @@
 #define FOOD_H
 
 #include <SFML/Graphics.hpp>
+#include "GameObject.h"
 
-class Food {
+class Food : public GameObject {
 private:
     sf::RectangleShape shape;
     sf::RectangleShape shapeShadow;
@@ -13,8 +14,9 @@ private:
 public:
     Food(int gridSize);
     void respawn(int gridSize);
-    void draw(sf::RenderWindow& window) const;
-    sf::Vector2f getPosition() const;
+    void update() override {} // Food doesn't need to update, but must override
+    void draw(sf::RenderWindow& window) const override;
+    sf::Vector2f getPosition() const override;
 };
 
 #endif // FOOD_H

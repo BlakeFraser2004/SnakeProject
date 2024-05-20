@@ -16,7 +16,7 @@ private:
 public:
     Snake(int gridSize);
     void update();
-    void render(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window);
     void handleInput(sf::RenderWindow& window);
     void grow();
     sf::Vector2i getHeadPosition();
