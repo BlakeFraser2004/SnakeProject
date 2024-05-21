@@ -1,4 +1,5 @@
 
+
 //Implementation of the HighScore class methods
 //This class manages the high score which includes loading, saving, and resetting the high score.
 #include "HighScore.h" 
