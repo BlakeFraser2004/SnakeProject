@@ -2,6 +2,7 @@
 #include "GameBoard.h"
 #include "Snake.h"
 #include "Food.h"
+#include "TriplePointFood.h"
 #include "Score.h"
 #include "MainMenu.h"
 #include "HighScore.h"
@@ -16,6 +17,7 @@ int main() {
     GameBoard gameBoard(50);
     Snake snake(10);
     Food food(9);
+    TriplePointFood triplePointFood(9); // Initialize TriplePointFood
     Score score;
     HighScore highscore;
     GameOver gameOver(window.getSize().x, window.getSize().y); // Instantiate GameOver
@@ -59,6 +61,7 @@ int main() {
                             // Reset game state
                             snake = Snake(10);
                             food = Food(9);
+                            triplePointFood = TriplePointFood(9); // Reset TriplePointFood
                             score.reset(); // Reset the score
                         } else if (selection == 1) {
                             window.close();
@@ -103,10 +106,13 @@ int main() {
             sf::Vector2i snakeHeadPositionInt = snake.getHeadPosition();
             sf::Vector2f snakeHeadPosition(static_cast<float>(snakeHeadPositionInt.x), static_cast<float>(snakeHeadPositionInt.y));
             sf::Vector2f foodPosition = food.getPosition();
+            sf::Vector2f triplePointFoodPosition = triplePointFood.getPosition(); // Get TriplePointFood position
             float distanceX = std::abs(snakeHeadPosition.x - foodPosition.x);
             float distanceY = std::abs(snakeHeadPosition.y - foodPosition.y);
+            float distanceXTriple = std::abs(snakeHeadPosition.x - triplePointFoodPosition.x); // Calculate distance for TriplePointFood
+            float distanceYTriple = std::abs(snakeHeadPosition.y - triplePointFoodPosition.y);
 
-            int cellSize = 0;  // Assuming cell size is 10, adjust accordingly
+            int cellSize = 10;  // Assuming cell size is 10, adjust accordingly
             float tolerance = static_cast<float>(cellSize);
 
             if (distanceX <= tolerance && distanceY <= tolerance) {
@@ -122,6 +128,23 @@ int main() {
                 food.respawn(50);
             }
 
+            if (distanceXTriple <= tolerance && distanceYTriple <= tolerance) { // Check collision with TriplePointFood
+                snake.grow();
+                snake.grow();
+                snake.grow(); // Triple point effect
+                score.increaseFoodEaten();
+                score.increaseFoodEaten();
+                score.increaseFoodEaten(); // Increase score triple times
+
+                if (score.calculateScore() > highscore.getHighScore()) {
+                    highscore.setHighScore(score.calculateScore());
+                    highScoreText.setString("High Score: " + std::to_string(highscore.getHighScore()));
+                    highScoreText.setFillColor(sf::Color::Yellow);
+                }
+
+                triplePointFood.respawn(50);
+            }
+
             // Update score based on time elapsed since last update
             while (timeSinceLastUpdate > sf::seconds(1.0f)) {
                 score.updateTimePlayed(1.0f);
@@ -133,6 +156,7 @@ int main() {
             window.clear(sf::Color::White);
             gameBoard.drawBoard(window);
             food.draw(window);
+            triplePointFood.draw(window); // Draw TriplePointFood
             snake.render(window);
             window.draw(scoreText);
             window.draw(highScoreText);
