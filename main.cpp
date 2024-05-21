@@ -97,6 +97,9 @@ int main() {
                 continue;
             }
 
+            
+
+
             sf::Vector2i snakeHeadPositionInt = snake.getHeadPosition();
             sf::Vector2f snakeHeadPosition(static_cast<float>(snakeHeadPositionInt.x), static_cast<float>(snakeHeadPositionInt.y));
             sf::Vector2f foodPosition = food.getPosition();

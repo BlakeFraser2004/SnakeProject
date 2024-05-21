@@ -1,5 +1,5 @@
 //Implementation of the GameBoard class methods
-//This class manages the game baord, which includes initialising the grid and drawing the board.
+//This class manages the game board, which includes initialising the grid and drawing the board.
 #include "GameBoard.h"
 
 //Initialises the gameboard with the given grid size

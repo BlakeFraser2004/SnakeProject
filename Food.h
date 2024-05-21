@@ -13,7 +13,7 @@ private:
 
 public:
     Food(int gridSize);
-    void respawn(int gridSize);
+    virtual void respawn(int gridSize);
     void update() override {} // Food doesn't need to update, but must override
     void draw(sf::RenderWindow& window) const override;
     sf::Vector2f getPosition() const override;
