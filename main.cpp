@@ -6,6 +6,7 @@
 #include "MainMenu.h"
 #include "HighScore.h"
 #include "GameOver.h"
+#include "TripleFood.h"
 #include <iostream>
 #include <ctime>
 
@@ -17,6 +18,7 @@ int main() {
     GameBoard gameBoard(50);
     Snake snake(10);
     Food food(9);
+    TripleFood tripleFood(9);
     Score score;
     HighScore highscore("highscores.txt");
     GameOver gameOver(window.getSize().x, window.getSize().y);
@@ -107,7 +109,7 @@ int main() {
             int cellSize = 0;  // Assuming cell size is 10, adjust accordingly
             float tolerance = static_cast<float>(cellSize);
 
-            if (distanceX <= tolerance && distanceY <= tolerance) {
+            if (distanceX <= tolerance && distanceY <= tolerance) { // Checking Collision with normal food
                 snake.grow();
                 score.increaseFoodEaten();
                 highScoreText.setString("High Score: " + std::to_string(highscore.getHighScore()));
@@ -119,6 +121,17 @@ int main() {
 
                 food.respawn(50);
             }
+            sf::Vector2f tripleFoodPosition = tripleFood.getPosition();
+            float distanceXTriple = std::abs(snakeHeadPosition.x - tripleFoodPosition.x);
+            float distanceYTriple = std::abs(snakeHeadPosition.y - tripleFoodPosition.y);
+
+            if (distanceXTriple <= tolerance && distanceYTriple <= tolerance) {
+                for (int i = 0; i < 3; ++i) {
+                snake.grow();
+                score.increaseFoodEaten();
+                }
+            tripleFood.respawn(50); // Respawn triple food
+            }
 
             scoreText.setString("Score: " + std::to_string(score.calculateScore()));
 
@@ -126,6 +139,7 @@ int main() {
             gameBoard.drawBoard(window);
             food.draw(window);
             snake.draw(window); // Changed to draw instead of render
+            tripleFood.draw(window);
             window.draw(scoreText);
             window.draw(highScoreText);
             window.display();

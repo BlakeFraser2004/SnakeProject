@@ -5,7 +5,7 @@
 #include "GameObject.h"
 
 class Food : public GameObject {
-private:
+protected:
     sf::RectangleShape shape;
     sf::RectangleShape shapeShadow;
     sf::Vector2i gridPosition; // Grid position of the food
