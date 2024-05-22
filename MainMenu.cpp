@@ -36,8 +36,6 @@ MainMenu::MainMenu(float width, float height) {
     MainMenuSelected = 0;
 }
 
-// Destructor definition
-// MainMenu::~MainMenu() {}
 
 // Draw the main menu on the provided window
 void MainMenu::draw(RenderWindow& window) {

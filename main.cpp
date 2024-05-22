@@ -1,3 +1,5 @@
+// main.cpp
+
 #include <SFML/Graphics.hpp>
 #include "GameBoard.h"
 #include "Snake.h"
@@ -14,7 +16,10 @@
 int main() {
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
+    // Create the SFML window
     sf::RenderWindow window(sf::VideoMode(500, 500), "Snake Game");
+
+    // Initialize game objects
     MainMenu mainMenu(window.getSize().x, window.getSize().y);
     GameBoard gameBoard(50);
     Snake snake(10);
@@ -25,12 +30,14 @@ int main() {
     GameOver gameOver(window.getSize().x, window.getSize().y);
     HowToPlay howToPlay(window.getSize().x, window.getSize().y);
 
+    // Load font for text display
     sf::Font font;
     if (!font.loadFromFile("arial.ttf")) {
         std::cerr << "Error loading font\n";
         return -1;
     }
 
+    // Text objects for displaying score and high score
     sf::Text scoreText;
     scoreText.setFont(font);
     scoreText.setCharacterSize(24);
@@ -43,14 +50,18 @@ int main() {
     highScoreText.setFillColor(sf::Color::White);
     highScoreText.setPosition(10, 40);
 
+    // SFML clock for time management
     sf::Clock clock;
     sf::Time timeSinceLastUpdate = sf::Time::Zero;
 
+    // Flags to control game state
     bool inMainMenu = true;
     bool isGameOver = false;
     bool inHowToPlay = false;
 
+    // Main game loop
     while (window.isOpen()) {
+        // Main menu state
         if (inMainMenu) {
             sf::Event event;
             while (window.pollEvent(event)) {
@@ -79,7 +90,9 @@ int main() {
             window.clear(sf::Color::Black);
             mainMenu.draw(window);
             window.display();
-        } else if (inHowToPlay) {
+        }
+        // How to play state
+        else if (inHowToPlay) {
             sf::Event event;
             while (window.pollEvent(event)) {
                 if (event.type == sf::Event::Closed) {
@@ -94,14 +107,18 @@ int main() {
             window.clear(sf::Color::Black);
             howToPlay.draw(window);
             window.display();
-        } else if (isGameOver) {
+        }
+        // Game over state
+        else if (isGameOver) {
             if (gameOver.handleInput(window)) {
                 inMainMenu = true;
             }
             window.clear(sf::Color::Black);
             gameOver.draw(window);
             window.display();
-        } else {
+        }
+        // Game state
+        else {
             sf::Time elapsedTime = clock.restart();
             timeSinceLastUpdate += elapsedTime;
 
@@ -112,15 +129,16 @@ int main() {
                 }
             }
 
+            // Handle input, update snake position and check collisions
             snake.handleInput(window);
             snake.update();
-
             if (snake.checkCollisionWithBorder(gameBoard)) {
                 std::cout << "Snake collided with the border or itself. Game Over!" << std::endl;
                 isGameOver = true;
                 continue;
             }
 
+            // Check collision with food and update score
             sf::Vector2i snakeHeadPositionInt = snake.getHeadPosition();
             sf::Vector2f snakeHeadPosition(static_cast<float>(snakeHeadPositionInt.x), static_cast<float>(snakeHeadPositionInt.y));
             sf::Vector2f foodPosition = food.getPosition();
@@ -130,42 +148,43 @@ int main() {
             int cellSize = 0;  // Assuming cell size is 10, adjust accordingly
             float tolerance = static_cast<float>(cellSize);
 
-            if (distanceX <= tolerance && distanceY <= tolerance) { // Checking Collision with normal food
+            // Check collision with normal food
+            if (distanceX <= tolerance && distanceY <= tolerance) {
                 snake.grow();
                 score.increaseFoodEaten();
                 highScoreText.setString("High Score: " + std::to_string(highscore.getHighScore()));
                 highScoreText.setFillColor(sf::Color::Yellow);
-
                 if (score.calculateScore() > highscore.getHighScore()) {
                     highscore.setHighScore(score.calculateScore());
                 }
-
                 food.respawn(50);
             }
+
+            // Check collision with triple food
             sf::Vector2f tripleFoodPosition = tripleFood.getPosition();
             float distanceXTriple = std::abs(snakeHeadPosition.x - tripleFoodPosition.x);
             float distanceYTriple = std::abs(snakeHeadPosition.y - tripleFoodPosition.y);
-
             if (distanceXTriple <= tolerance && distanceYTriple <= tolerance) {
                 for (int i = 0; i < 3; ++i) {
                     snake.grow();
                     score.increaseFoodEaten();
                     highScoreText.setString("High Score: " + std::to_string(highscore.getHighScore()));
                     highScoreText.setFillColor(sf::Color::Yellow);
-
                     if (score.calculateScore() > highscore.getHighScore()) {
                         highscore.setHighScore(score.calculateScore());
                     }
                 }
-            tripleFood.respawn(50); // Respawn triple food
+                tripleFood.respawn(50); // Respawn triple food
             }
 
+            // Update score display
             scoreText.setString("Score: " + std::to_string(score.calculateScore()));
 
+            // Draw game objects on the window
             window.clear(sf::Color::White);
             gameBoard.drawBoard(window);
             food.draw(window);
-            snake.draw(window); // Changed to draw instead of render
+            snake.draw(window);
             tripleFood.draw(window);
             window.draw(scoreText);
             window.draw(highScoreText);
@@ -175,3 +194,4 @@ int main() {
 
     return 0;
 }
+

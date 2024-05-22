@@ -1,3 +1,5 @@
+// HowToPlay.h
+
 #ifndef HOWTOPLAY_H
 #define HOWTOPLAY_H
 
@@ -5,7 +7,10 @@
 
 class HowToPlay {
 public:
+    // Constructor
     HowToPlay(float width, float height);
+    
+    // Draw the HowToPlay screen on the provided window
     void draw(sf::RenderWindow& window);
 
 private:
@@ -15,3 +20,4 @@ private:
 };
 
 #endif // HOWTOPLAY_H
+

@@ -12,11 +12,11 @@ protected:
     int gridSize; // Size of each grid cell in pixels
 
 public:
-    Food(int gridSize);
-    void respawn(int gridSize);
+    Food(int gridSize); // Constructor
+    void respawn(int gridSize); // Respawn the food at a new position within the grid
     void update() override {} // Food doesn't need to update, but must override
-    void draw(sf::RenderWindow& window) const override;
-    sf::Vector2f getPosition() const override;
+    void draw(sf::RenderWindow& window) const override; // Draw the food on the provided window
+    sf::Vector2f getPosition() const override; // Get the position of the food
 };
 
 #endif // FOOD_H

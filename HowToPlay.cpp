@@ -1,11 +1,15 @@
+// HowToPlay.cpp
+
 #include "HowToPlay.h"
 #include <iostream>
 
+// Constructor to initialize the HowToPlay screen
 HowToPlay::HowToPlay(float width, float height) {
     if (!font.loadFromFile("arial.ttf")) {
         std::cerr << "Error loading font\n";
     }
 
+    // Set up how to play text
     howToPlayText.setFont(font);
     howToPlayText.setCharacterSize(24);
     howToPlayText.setFillColor(sf::Color::White);
@@ -19,6 +23,7 @@ HowToPlay::HowToPlay(float width, float height) {
     );
     howToPlayText.setPosition(45, 50);
 
+    // Set up close text
     closeText.setFont(font);
     closeText.setCharacterSize(30);
     closeText.setFillColor(sf::Color::Red);
@@ -26,7 +31,9 @@ HowToPlay::HowToPlay(float width, float height) {
     closeText.setPosition(width / 2 - closeText.getGlobalBounds().width / 2, height - 50);
 }
 
+// Draw the HowToPlay screen on the provided window
 void HowToPlay::draw(sf::RenderWindow& window) {
     window.draw(howToPlayText);
     window.draw(closeText);
 }
+
