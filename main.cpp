@@ -7,6 +7,7 @@
 #include "HighScore.h"
 #include "GameOver.h"
 #include "TripleFood.h"
+#include "HowToPlay.h"
 #include <iostream>
 #include <ctime>
 
@@ -22,6 +23,7 @@ int main() {
     Score score;
     HighScore highscore("highscores.txt");
     GameOver gameOver(window.getSize().x, window.getSize().y);
+    HowToPlay howToPlay(window.getSize().x, window.getSize().y);
 
     sf::Font font;
     if (!font.loadFromFile("arial.ttf")) {
@@ -46,6 +48,7 @@ int main() {
 
     bool inMainMenu = true;
     bool isGameOver = false;
+    bool inHowToPlay = false;
 
     while (window.isOpen()) {
         if (inMainMenu) {
@@ -67,11 +70,29 @@ int main() {
                     } else if (event.key.code == sf::Keyboard::E) {
                         window.close();
                         return 0;
+                    } else if (event.key.code == sf::Keyboard::H) {
+                        inMainMenu = false;
+                        inHowToPlay = true;
                     }
                 }
             }
             window.clear(sf::Color::Black);
             mainMenu.draw(window);
+            window.display();
+        } else if (inHowToPlay) {
+            sf::Event event;
+            while (window.pollEvent(event)) {
+                if (event.type == sf::Event::Closed) {
+                    window.close();
+                } else if (event.type == sf::Event::KeyPressed) {
+                    if (event.key.code == sf::Keyboard::M) {
+                        inHowToPlay = false;
+                        inMainMenu = true;
+                    }
+                }
+            }
+            window.clear(sf::Color::Black);
+            howToPlay.draw(window);
             window.display();
         } else if (isGameOver) {
             if (gameOver.handleInput(window)) {
@@ -127,8 +148,14 @@ int main() {
 
             if (distanceXTriple <= tolerance && distanceYTriple <= tolerance) {
                 for (int i = 0; i < 3; ++i) {
-                snake.grow();
-                score.increaseFoodEaten();
+                    snake.grow();
+                    score.increaseFoodEaten();
+                    highScoreText.setString("High Score: " + std::to_string(highscore.getHighScore()));
+                    highScoreText.setFillColor(sf::Color::Yellow);
+
+                    if (score.calculateScore() > highscore.getHighScore()) {
+                        highscore.setHighScore(score.calculateScore());
+                    }
                 }
             tripleFood.respawn(50); // Respawn triple food
             }

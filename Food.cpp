@@ -15,7 +15,6 @@ void Food::respawn(int gridSize) {
     // Generate random coordinates within the grid
     int x = rand() % gridSize;
     int y = rand() % gridSize;
-    std::cout << x << "  " << y << std::endl;
 
     // Set the position of the shape
     shapeShadow.setPosition(sf::Vector2f(10 * x, 10 * y));

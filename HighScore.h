@@ -6,18 +6,19 @@
 #include <iostream>
 #include <string>
 
-
 //The HighScore class inherits from the Score class and manages high scores, including loading, saving, resetting, highscores.
 class HighScore : public Score {
 private:
     //The name of the file where the high score is saved.
     std::string filename;
     // Records the highest score achieved.
-    int highestScore;     
+    int *highestScore;     
 
 public:
     //Constructor that initializes the high score file.
     HighScore(const std::string& file);
+    // Destructor to clean up dynamic memory
+    ~HighScore();
     // Function to load high score from file
     void loadHighScore(); 
     // Function to save high score to the file
@@ -30,4 +31,4 @@ public:
     int getHighScore();
 };
 
-#endif
+#endif // HIGHSCORE_H

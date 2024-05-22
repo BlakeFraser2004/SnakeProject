@@ -16,9 +16,8 @@ void TripleFood::respawn(int gridSize) {
     // Generate random coordinates within the grid
     int x = rand() % gridSize;
     int y = rand() % gridSize;
-    std::cout << "TripleFood Respawned at: " << x << "  " << y << std::endl;
 
     // Set the position of the shape
-    shape.setPosition(sf::Vector2f(x * gridSize, y * gridSize));
+    shape.setPosition(sf::Vector2f(x, y));
     shapeShadow.setPosition(sf::Vector2f(10 * x, 10 * y));
 }

@@ -19,7 +19,7 @@ void Snake::update() {
     }
 }
 
-void Snake::draw(sf::RenderWindow& window) {
+void Snake::draw(sf::RenderWindow& window) const {
     sf::RectangleShape segment(sf::Vector2f(gridSize - 1, gridSize - 1));
     segment.setFillColor(color);
 
@@ -54,7 +54,7 @@ void Snake::grow() {
 
 
 
-sf::Vector2i Snake::getHeadPosition() {
+sf::Vector2i Snake::getHeadPosition() const {
     return segments.front();
 }
 
@@ -63,7 +63,7 @@ int Snake::getSize() const {
 }
 
 
-bool Snake::checkCollisionWithBorder(const GameBoard& gameBoard) {
+bool Snake::checkCollisionWithBorder(const GameBoard& gameBoard) const {
     sf::Vector2i headPosition = segments.front();
     // Check if the head of the snake has collided with the borders
     if (headPosition.x < 0 || headPosition.x >= gameBoard.getBoardSize() || 
@@ -73,7 +73,7 @@ bool Snake::checkCollisionWithBorder(const GameBoard& gameBoard) {
     return false; // No collision
 }
 
-bool Snake::checkSelfCollision(const sf::Vector2i& headPosition) {
+bool Snake::checkSelfCollision(const sf::Vector2i& headPosition) const {
     // Iterate through the segments of the snake's body, excluding the head
     for (size_t i = 1; i < segments.size(); ++i) {
         // Check if the head of the snake collides with any other segment, except the food position
@@ -89,4 +89,9 @@ void Snake::reset() {
     segments.clear(); // Clear all segments
     segments.push_back(sf::Vector2i(gridSize / 2, gridSize / 2)); // Initial position of the snake
     direction = sf::Vector2i(1, 0); // Initial direction (right)
+}
+
+sf::Vector2f Snake::getPosition() const {
+    sf::Vector2i head = getHeadPosition();
+    return sf::Vector2f(static_cast<float>(head.x * gridSize), static_cast<float>(head.y * gridSize));
 }
