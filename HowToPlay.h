@@ -7,7 +7,6 @@ class HowToPlay {
 public:
     HowToPlay(float width, float height);
     void draw(sf::RenderWindow& window);
-    bool handleInput(sf::RenderWindow& window);
 
 private:
     sf::Font font;

@@ -16,7 +16,6 @@ HowToPlay::HowToPlay(float width, float height) {
         "Eat red food items to gain 1 point.\n"
         "Eat yellow food items to gain 3 point.\n"
         "Avoid colliding with the walls or yourself.\n"
-        "Press H to close this window."
     );
     howToPlayText.setPosition(45, 50);
 
@@ -30,17 +29,4 @@ HowToPlay::HowToPlay(float width, float height) {
 void HowToPlay::draw(sf::RenderWindow& window) {
     window.draw(howToPlayText);
     window.draw(closeText);
-}
-
-bool HowToPlay::handleInput(sf::RenderWindow& window) {
-    sf::Event event;
-    while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
-            window.close();
-            return false;
-        } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::C) {
-            return true;
-        }
-    }
-    return false;
 }

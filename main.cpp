@@ -127,7 +127,7 @@ int main() {
             float distanceX = std::abs(snakeHeadPosition.x - foodPosition.x);
             float distanceY = std::abs(snakeHeadPosition.y - foodPosition.y);
 
-            int cellSize = 10;  // Assuming cell size is 10, adjust accordingly
+            int cellSize = 0;  // Assuming cell size is 10, adjust accordingly
             float tolerance = static_cast<float>(cellSize);
 
             if (distanceX <= tolerance && distanceY <= tolerance) { // Checking Collision with normal food

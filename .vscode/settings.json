@@ -44,6 +44,12 @@
         "streambuf": "cpp",
         "tuple": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "__hash_table": "cpp",
+        "__node_handle": "cpp",
+        "__tree": "cpp",
+        "map": "cpp",
+        "optional": "cpp",
+        "unordered_map": "cpp"
     }
 }
