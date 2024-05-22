@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <cstdlib> // For rand()
-#include <ctime>   // For seeding rand()
+#include <cstdlib>
+#include <ctime>
 #include "Food.h"
 
-// Constants for the test
+// Constants for this test
 const int window_width = 800;
 const int window_height = 600;
 const int grid_size = 20;

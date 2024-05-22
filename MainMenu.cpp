@@ -7,18 +7,6 @@ MainMenu::MainMenu(float width, float height) {
         std::cerr << "Error loading font" << std::endl;
     }
 
-    // Load background texture
-    if (!backgroundTexture.loadFromFile("grass.png")) {
-        std::cerr << "Error loading background image" << std::endl;
-    }
-
-    // Set background sprite
-    backgroundSprite.setTexture(backgroundTexture);
-    backgroundSprite.setScale(
-        width / backgroundSprite.getLocalBounds().width,
-        height / backgroundSprite.getLocalBounds().height
-    );
-
     // Set up menu items.
     mainMenu[0].setFont(font);
     mainMenu[0].setFillColor(Color::White);
@@ -30,13 +18,13 @@ MainMenu::MainMenu(float width, float height) {
     mainMenu[1].setFillColor(Color::White);
     mainMenu[1].setString("How to Play (Press H)");
     mainMenu[1].setCharacterSize(30);
-    mainMenu[1].setPosition(Vector2f(width / 4, height / (3)));
+    mainMenu[1].setPosition(Vector2f(width / 4, height / (2.5)));
 
     mainMenu[2].setFont(font);
     mainMenu[2].setFillColor(Color::White);
     mainMenu[2].setString("Reset HighScore (Press W)");
     mainMenu[2].setCharacterSize(30);
-    mainMenu[2].setPosition(Vector2f(width / 4, height / (2.5)));
+    mainMenu[2].setPosition(Vector2f(width / 4, height / (2.0)));
 
     mainMenu[3].setFont(font);
     mainMenu[3].setFillColor(Color::White);
@@ -50,8 +38,19 @@ MainMenu::MainMenu(float width, float height) {
 
 // Draw the main menu on the provided window
 void MainMenu::draw(RenderWindow& window) {
-   // Draw the background first 9
-   window.draw(backgroundSprite);
+    // Set a black background
+    window.clear(sf::Color::Black);
+    
+    // Draw "Snake" at the top of the screen
+    sf::Text title;
+    title.setFont(font);
+    title.setString("Snake");
+    title.setCharacterSize(50);
+    title.setFillColor(sf::Color::Red);
+    title.setPosition(window.getSize().x / 2 - title.getGlobalBounds().width / 2, 30);
+    window.draw(title);
+
+    // Draw main menu items
     for (int i = 0; i < Max_main_menu; i++) {
         window.draw(mainMenu[i]);
     }

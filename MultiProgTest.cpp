@@ -6,21 +6,23 @@
 #include "Snake.h"
 #include "GameBoard.h"
 
+// Define the dimensions of the main window
 const int WINDOW_WIDTH = 500;
 const int WINDOW_HEIGHT = 500;
+// Define the size of each grid cell on the game board
 const int GRID_SIZE = 50;
 
 int main() {
-    // Seed the random number generator
+    // Seed the random number generator for food spawning
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "Snake and Food Test");
 
     // Create instances of the GameBoard, Food, and Snake classes
-    GameBoard gameBoard(50);
-    Food food(10);
-    Snake snake(10);
+    GameBoard gameBoard(GRID_SIZE);
+    Food food(GRID_SIZE / 5); // The size of the food is set to one-fifth of the grid size
+    Snake snake(GRID_SIZE / 5); // The size of the snake is set to one-fifth of the grid size
 
     // Main loop
     while (window.isOpen()) {
@@ -40,6 +42,7 @@ int main() {
 
         // Check if the snake's head position matches the food position
         if (snake.getHeadPosition() == sf::Vector2i(food.getPosition().x, food.getPosition().y)) {
+            // If the snake eats the food, it grows and the food respawns
             snake.grow();
             food.respawn(GRID_SIZE);
         }
@@ -55,7 +58,7 @@ int main() {
         // Display the contents of the window
         window.display();
 
-        // Output the positions
+        // Output the positions of the snake's head, food, and the size of the snake
         std::cout << "Snake Head Position: (" << snake.getHeadPosition().x << ", " << snake.getHeadPosition().y << ")\n";
         std::cout << "Food Position: (" << food.getPosition().x << ", " << food.getPosition().y << ")\n";
         std::cout << "Snake Size: " << snake.getSize() << "\n";

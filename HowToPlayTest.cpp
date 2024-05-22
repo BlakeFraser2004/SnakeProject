@@ -1,8 +1,9 @@
-#include "HowToPlay.h"
 #include <SFML/Graphics.hpp>
+#include "HowToPlay.h"
 #include <iostream>
 
 int main() {
+    //constants for the test
     const int WINDOW_WIDTH = 800;
     const int WINDOW_HEIGHT = 600;
 
@@ -21,7 +22,6 @@ int main() {
                 window.close();
             } else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::M) {
                 std::cout << "Returning to main menu...\n";
-                // You can implement actual navigation logic here
             }
         }
 

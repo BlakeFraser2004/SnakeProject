@@ -149,7 +149,13 @@ int main() {
             if (distanceXTriple <= tolerance && distanceYTriple <= tolerance) {
                 for (int i = 0; i < 3; ++i) {
                     snake.grow();
-                score.increaseFoodEaten();
+                    score.increaseFoodEaten();
+                    highScoreText.setString("High Score: " + std::to_string(highscore.getHighScore()));
+                    highScoreText.setFillColor(sf::Color::Yellow);
+
+                    if (score.calculateScore() > highscore.getHighScore()) {
+                        highscore.setHighScore(score.calculateScore());
+                    }
                 }
             tripleFood.respawn(50); // Respawn triple food
             }

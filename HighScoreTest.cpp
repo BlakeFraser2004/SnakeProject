@@ -1,5 +1,5 @@
 #include <iostream>
-#include "HighScore.h" // Include your HighScore class header
+#include "HighScore.h"
 
 int main() {
     // Create HighScore instance with filename "highscore.txt"
