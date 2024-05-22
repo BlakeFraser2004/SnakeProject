@@ -1,0 +1,32 @@
+CHANGE LOG:
+
+
+### changeLog.txt
+
+No significant design changes, with some minor changes being implemented for functionality purposes.
+
+The following comprehensive changes have been implemented in the project:
+
+1. Triple Point System:
+
+   - Introduced a new `TriplePointFood` class that inherits from       `GameObject`. The `TriplePointFood` class provides food items that grow the snake by three segments when consumed and increase the score accordingly.
+2. How to Play Function:
+
+   - Added a "How to Play" function to guide new players on the game mechanics and controls. This feature is accessible from the main menu and helps enhance user experience.
+
+3. Wiping the High Score Function:
+   - Implemented a function to reset or wipe the high score. This allows players to start fresh
+
+4. More Extensive Main Menu/Start Screen:
+Enhanced the main menu with additional options and effective functionality.
+   - Added options for starting a new game, viewing high scores, accessing the "How to Play" section, and exiting the game button called ‘Quit Game’ .
+
+5. Game Over Screen:
+   - Introduced a `GameOver` class to handle the game over state.
+   - The game over screen shows the players the game has concluded and provides them with the option to go to the main menu via the ‘M’ key.
+
+6. HighScore File:
+   - Created a new `HighScore` class with its own CPP file to manage high score functionalities. This class handles recording, and resetting high scores, and integrates with the main.cpp file loops.
+
+7. Unused Components:
+   - Decided not to use the `InputManager` and `SnakeGame` classes from the initial plan. These components were deemed unnecessary for the current implementation and were omitted to streamline the project.
